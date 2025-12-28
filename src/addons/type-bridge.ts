@@ -22,6 +22,8 @@ import type {
   Goal,
   GoalAllocation,
   Holding,
+  HttpFetchOptions,
+  HttpFetchResponse,
   ImportMappingData,
   IncomeSummary,
   MarketDataProviderInfo,
@@ -34,18 +36,6 @@ import type {
   UpdateAssetProfile,
 } from "@/lib/types";
 import type { HostAPI as SDKHostAPI } from "@wealthfolio/addon-sdk";
-
-export interface HttpFetchOptions {
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS';
-  headers?: Record<string, string>;
-  body?: Uint8Array;
-}
-
-export interface HttpFetchResponse {
-  status: number;
-  headers: Record<string, string>;
-  body: Uint8Array;
-}
 
 /**
  * Internal HostAPI interface that matches the actual command function signatures

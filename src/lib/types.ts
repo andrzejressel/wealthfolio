@@ -561,3 +561,21 @@ export interface UpdateInfo {
   changelogUrl?: string;
   screenshots?: string[];
 }
+
+/**
+ * Options for HTTP fetch requests
+ */
+export interface HttpFetchOptions {
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS';
+  headers?: Record<string, string>;
+  body?: Uint8Array;
+}
+
+/**
+ * Response from HTTP fetch requests
+ */
+export interface HttpFetchResponse {
+  status: number;
+  headers: Record<string, string>;
+  body: Uint8Array;
+}
