@@ -6,6 +6,7 @@ pub mod error;
 pub mod goal;
 pub mod limits;
 pub mod market_data;
+pub mod network;
 pub mod platform;
 pub mod portfolio;
 pub mod providers_settings;

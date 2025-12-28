@@ -185,6 +185,13 @@ export const PERMISSION_CATEGORIES: PermissionCategory[] = [
     functions: ['sidebar.addItem', 'router.add'],
     riskLevel: 'low',
   },
+  {
+    id: 'network',
+    name: 'Network',
+    description: 'Access to network operations and external HTTP requests',
+    functions: ['fetch'],
+    riskLevel: 'high',
+  },
 ];
 
 /**

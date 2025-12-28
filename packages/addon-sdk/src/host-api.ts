@@ -638,6 +638,70 @@ export interface QueryAPI {
 }
 
 /**
+ * Request options for fetch API
+ */
+export interface FetchOptions {
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS';
+  headers?: Record<string, string>;
+  /** Request body as binary data */
+  body?: Uint8Array;
+}
+
+/**
+ * Response from fetch API
+ */
+export interface FetchResponse {
+  status: number;
+  headers: Record<string, string>;
+  /** Response body as binary data */
+  body: Uint8Array;
+}
+
+/**
+ * Network APIs for HTTP requests
+ * 
+ * ⚠️ DESKTOP ONLY - Network fetch is only available in desktop (Tauri) mode for security reasons.
+ * In web mode, this API will throw an error.
+ */
+export interface NetworkAPI {
+  /**
+   * Make an HTTP request
+   * All data is treated as binary (Uint8Array).
+   * For text data, use TextEncoder/TextDecoder to convert to/from strings.
+   * 
+   * ⚠️ This function only works in desktop mode. Will throw an error in web mode.
+   * 
+   * @param url The URL to fetch
+   * @param options Optional request configuration
+   * @returns Promise resolving to the response with binary body
+   * @throws Error if called in web mode
+   * 
+   * @example
+   * // Text request/response
+   * const encoder = new TextEncoder();
+   * const decoder = new TextDecoder();
+   * const response = await ctx.api.network.fetch('https://api.example.com/data', {
+   *   method: 'POST',
+   *   headers: { 'Content-Type': 'application/json' },
+   *   body: encoder.encode(JSON.stringify({ key: 'value' }))
+   * });
+   * const text = decoder.decode(response.body);
+   * const data = JSON.parse(text);
+   * 
+   * @example
+   * // Binary request/response (image, etc.)
+   * const imageData = new Uint8Array([...]); // from file, canvas, etc.
+   * const response = await ctx.api.network.fetch('https://example.com/upload', {
+   *   method: 'POST',
+   *   headers: { 'Content-Type': 'image/png' },
+   *   body: imageData
+   * });
+   * // response.body is raw binary data
+   */
+  fetch(url: string, options?: FetchOptions): Promise<FetchResponse>;
+}
+
+/**
  * Comprehensive Host API interface providing access to all Wealthfolio functionality
  * Organized by functional domains for better discoverability and maintainability
  */
@@ -692,4 +756,7 @@ export interface HostAPI {
 
   /** React Query operations */
   query: QueryAPI;
+
+  /** Network operations */
+  network: NetworkAPI;
 }

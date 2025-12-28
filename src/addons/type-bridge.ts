@@ -35,6 +35,18 @@ import type {
 } from "@/lib/types";
 import type { HostAPI as SDKHostAPI } from "@wealthfolio/addon-sdk";
 
+export interface HttpFetchOptions {
+  method?: string;
+  headers?: Record<string, string>;
+  body?: string;
+}
+
+export interface HttpFetchResponse {
+  status: number;
+  headers: Record<string, string>;
+  body: string;
+}
+
 /**
  * Internal HostAPI interface that matches the actual command function signatures
  * This allows us to maintain type safety internally while providing a clean SDK interface
@@ -162,6 +174,9 @@ export interface InternalHostAPI {
   getQueryClient(): unknown;
   invalidateQueries(queryKey: string | string[]): void;
   refetchQueries(queryKey: string | string[]): void;
+
+  // Network functions
+  httpFetch(url: string, options?: HttpFetchOptions): Promise<HttpFetchResponse>;
 }
 
 /**
@@ -283,6 +298,10 @@ export function createSDKHostAPIBridge(internalAPI: InternalHostAPI, addonId?: s
       getClient: internalAPI.getQueryClient,
       invalidateQueries: internalAPI.invalidateQueries,
       refetchQueries: internalAPI.refetchQueries,
+    },
+
+    network: {
+      fetch: internalAPI.httpFetch,
     },
   } as unknown as SDKHostAPI;
 }

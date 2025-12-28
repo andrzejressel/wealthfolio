@@ -49,6 +49,7 @@ import {
   updateAssetProfile,
   updateQuote,
 } from "@/commands/market-data";
+import { httpFetch } from "@/commands/network";
 import {
   calculateAccountsSimplePerformance,
   calculatePerformanceHistory,
@@ -345,6 +346,9 @@ export function createAddonContext(addonId: string): AddonContext {
               });
             }
           },
+
+          // Network functions
+          httpFetch,
         },
         addonId,
       );
