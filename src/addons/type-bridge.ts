@@ -36,15 +36,15 @@ import type {
 import type { HostAPI as SDKHostAPI } from "@wealthfolio/addon-sdk";
 
 export interface HttpFetchOptions {
-  method?: string;
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS';
   headers?: Record<string, string>;
-  body?: string;
+  body?: Uint8Array;
 }
 
 export interface HttpFetchResponse {
   status: number;
   headers: Record<string, string>;
-  body: string;
+  body: Uint8Array;
 }
 
 /**
