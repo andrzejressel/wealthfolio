@@ -641,7 +641,7 @@ export interface QueryAPI {
  * Request options for fetch API
  */
 export interface FetchOptions {
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS';
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD';
   headers?: Record<string, string>;
   /** Request body as binary data */
   body?: Uint8Array;

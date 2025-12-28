@@ -566,7 +566,7 @@ export interface UpdateInfo {
  * Options for HTTP fetch requests
  */
 export interface HttpFetchOptions {
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS';
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD';
   headers?: Record<string, string>;
   body?: Uint8Array;
 }

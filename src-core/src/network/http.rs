@@ -27,7 +27,7 @@ pub async fn http_fetch(
         .and_then(|o| o.method.as_deref())
         .unwrap_or("GET");
 
-    let mut request = match method.to_uppercase().as_str() {
+    let mut request = match method {
         "GET" => client.get(&url),
         "POST" => client.post(&url),
         "PUT" => client.put(&url),
